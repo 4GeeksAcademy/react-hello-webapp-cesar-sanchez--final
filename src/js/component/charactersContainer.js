@@ -5,22 +5,25 @@ import "../../styles/cardContainer.css";
 
 const Characters = () => {
     const { store, actions } = useContext(Context);
+    
 
     useEffect(() => {
-       
-        if (store.characters.length === 0) {
-            actions.addCharacters();
-        }
-    }, [actions, store.characters]);
+
+        //console.log("Efecto de carga de personajes");
+            actions.get_all_persons();
+            
+        
+    }, []);
+    console.log(store.persons);
 
     return (
         <div className="contenedor-cards">
-            {store.characters && store.characters.length > 0 ? (
-                store.characters.map((value, index) => (
+            {store.persons && store.persons.length > 0 ? (
+                store.persons.map((value, index) => (
                     <Card
                         nombre={value.name}
                         key={index}
-                        id={value.uid}
+                        id={value.id}
                         type={"characters"}
                         addFavoritos={() => actions.addFavoritos(value)}
                         isFavorito={actions.verificarFavorito(value)}

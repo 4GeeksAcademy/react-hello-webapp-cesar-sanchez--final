@@ -7,6 +7,7 @@ import PlanetDescription from "./views/planet-description.js";
 import VehicleDescription from "./views/vehicle-description.js";
 import Navbar from "./component/navbar.js";
 import injectContext from "./store/appContext.js";
+import Login from "./views/login.js";
 
 
 const Layout = () => {
@@ -19,7 +20,8 @@ const Layout = () => {
 				<ScrollToTop>
 					<Navbar />
 					<Routes>
-						<Route path="/" element={<Home />} />
+						<Route path="/" element={<Login />} />
+						<Route path="/home" element={<Home />} />
 						<Route path="/characters/:id" element={<CharacterDescription />} />
 						<Route path="/planets/:id" element={<PlanetDescription />} />
 						<Route path="/vehicles/:id" element={<VehicleDescription />} />

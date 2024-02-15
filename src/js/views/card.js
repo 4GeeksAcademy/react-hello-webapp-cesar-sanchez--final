@@ -26,7 +26,8 @@ const Card = (props) => {
 			<div className="card-body">
 				<h5 className="card-title">{props.nombre}</h5>
 				<div className="d-flex justify-content-between">
-					<Link to={`${props.type}/${props.id}`} className="btn btn-outline-primary">Learn more!</Link>
+					<Link to={`/${props.type}/${props.id}`} className="btn btn-outline-primary">Learn more!</Link>
+
 					<button type="button" className="btn btn-outline-warning fa fa-2x fa-heart  mt-1 me-1" onClick={agregarFavoritos}>
 						{verificarFav ? (
 							<i className="fa fa-2x fa-heart mt-1 me-1"></i>

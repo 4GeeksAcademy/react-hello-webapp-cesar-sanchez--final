@@ -8,10 +8,10 @@ const Planets = () => {
 
     useEffect(() => {
         // Llama a la acción fetchCharacters solo si no hay personajes cargados
-        if (store.vehicles.length === 0) {
-            actions.addPlanets();
-        }
-    }, [actions, store.vehicles]);
+        
+            actions.get_all_planets();
+        
+    }, []);
 
     return (
         <div className="contenedor-cards">

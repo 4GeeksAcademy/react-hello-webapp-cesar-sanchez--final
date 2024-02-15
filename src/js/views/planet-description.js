@@ -10,18 +10,35 @@ const PlanetDescription = () => {
     const { id } = useParams();
 
     async function solicitarData() {
-        const respose = await fetch("https://swapi.tech/api/planets/" + id);
-        const data = await respose.json();
-        const result = data.result.properties;
-        const result2 = data.result.description;
-        setPropiedades(result);
-        setDescripcion(result2);
-        console.log(data.result)
-    }
+        try {
+            console.log("Fetching data from API...");
+            let response = await fetch(`https://didactic-space-halibut-qjgvwjj44rh99g7-3000.app.github.dev/planets/${id}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+        
+            }
+            
+            
+        })
+            
+            console.log("Status de la respuesta:", response.status);
+            const data = await response.json();
+
+            
+            const result = data.person; 
+            const result2 = data.description;
+
+            setPropiedades(result);
+            setDescripcion(result2);
+        } catch (error) {
+            console.error("Error en la solicitud:", error);
+        }
+    }    
 
     useEffect(() => {
         solicitarData();
-    }, [])
+    }, [id])
 
     return (
         <div className="contenedor-principal-planets">
@@ -43,34 +60,23 @@ const PlanetDescription = () => {
                     </div>
                     <div className="col-sm-12 col-md-4 col-lg-2 ps-4 pt-4">    
                         <div className="text">
-                            <p>Climate</p>
-                            <p>{propiedades.climate}</p>
+                            <p>Diameter</p>
+                            <p>{propiedades.diameter}</p>
                         </div>
                     </div> 
                     <div className="col-sm-12 col-md-4 col-lg-2 ps-4 pt-4">   
+                        <div className="text">
+                            <p>Climate</p>
+                            <p>{propiedades.climate}</p>
+                        </div>
+                    </div>
+                    <div className="col-sm-12 col-md-4 col-lg-2 ps-4 pt-4">    
                         <div className="text">
                             <p>Population</p>
                             <p>{propiedades.population}</p>
                         </div>
                     </div>
-                    <div className="col-sm-12 col-md-4 col-lg-2 ps-4 pt-4">    
-                        <div className="text">
-                            <p>Orbital Period</p>
-                            <p>{propiedades.orbital_period}</p>
-                        </div>
-                    </div>
-                    <div className="col-sm-12 col-md-4 col-lg-2 ps-4 pt-4">    
-                        <div className="text">
-                            <p>Rotation Period</p>
-                            <p>{propiedades.rotation_period}</p>
-                        </div>
-                    </div>
-                    <div className="col-sm-12 col-md-4 col-lg-2 ps-4 pt-4">    
-                        <div className="text">
-                            <p>Diameter</p>
-                            <p>{propiedades.diameter}</p>
-                        </div>
-                    </div>    
+                    
                 </div>    
             </div>
 

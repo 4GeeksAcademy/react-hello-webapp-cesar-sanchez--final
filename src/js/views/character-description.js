@@ -10,18 +10,35 @@ const CharacterDescription = () => {
 
     const { id } = useParams();
 
-   async function solicitarData() {
-        const respose = await fetch("https://swapi.tech/api/people/" + id);
-        const data = await respose.json();
-        const result = data.result.properties;
-        const result2 = data.result.description;
-        setPropiedades(result);
-        setDescripcion(result2);
-    }
+    async function solicitarData() {
+        try {
+            console.log("Fetching data from API...");
+            let response = await fetch(`https://didactic-space-halibut-qjgvwjj44rh99g7-3000.app.github.dev/persons/${id}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+        
+            }
+            
+            
+        })
+            
+            console.log("Status de la respuesta:", response.status);
+            const data = await response.json();
 
+            
+            const result = data.person; 
+            const result2 = data.description;
+
+            setPropiedades(result);
+            setDescripcion(result2);
+        } catch (error) {
+            console.error("Error en la solicitud:", error);
+        }
+    }
     useEffect(() => {
         solicitarData();
-    }, [])
+    }, [id])
 
     return (
         <div className="contenedor-principal-characters">
@@ -43,34 +60,23 @@ const CharacterDescription = () => {
                     </div> 
                     <div className="col-sm-12 col-md-4 col-lg-2 ps-4 pt-4">       
                         <div className="text">
-                            <p>Birth Year</p>
-                            <p>{propiedades.birth_year}</p>
+                            <p>Height</p>
+                            <p>{propiedades.height}</p>
                         </div>
                     </div>  
                     <div className="col-sm-12 col-md-4 col-lg-2 ps-4 pt-4">  
                         <div className="text">
-                            <p>Gender</p>
-                            <p>{propiedades.gender}</p>
+                            <p>Eye Color</p>
+                            <p>{propiedades.eye_color}</p>
                         </div>
                     </div>
                     <div className="col-sm-12 col-md-4 col-lg-2 ps-4 pt-4">    
                         <div className="text">
-                            <p>Height</p>
-                            <p>{propiedades.height}</p>
+                            <p>Hair Color</p>
+                            <p>{propiedades.hair_color}</p>
                         </div>
                     </div> 
-                    <div className="col-sm-12 col-md-4 col-lg-2 ps-4 pt-4">   
-                        <div className="text">
-                            <p>Skin Color</p>
-                            <p>{propiedades.skin_color}</p>
-                        </div>
-                    </div> 
-                    <div className="col-sm-12 col-md-4 col-lg-2 ps-4 pt-4">   
-                        <div className="text">
-                            <p>Eye Color</p>
-                            <p>{propiedades.eye_color}</p>
-                        </div>
-                    </div>    
+                    
                     
                 </div>    
             </div>

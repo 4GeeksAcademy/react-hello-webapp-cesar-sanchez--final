@@ -8,14 +8,14 @@ const Vehicles = () => {
 
     useEffect(() => {
         // Llama a la acción fetchCharacters solo si no hay personajes cargados
-        if (store.vehicles.length === 0) {
-            actions.addVehicles();
-        }
-    }, [actions, store.vehicles]);
+        
+            actions.get_all_vehicles();
+        
+    }, []);
 
     return (
         <div className="contenedor-cards">
-            {store.planets && store.vehicles.length > 0 ? (
+            {store.vehicles && store.vehicles.length > 0 ? (
                 store.vehicles.map((value, index) => (
                     <Card
                         nombre={value.name}
